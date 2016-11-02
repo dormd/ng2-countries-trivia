@@ -1,0 +1,17 @@
+<div class='riddle'>
+    <div class='question'>
+        {{ question }}
+    </div>
+
+    <hr />
+
+    <div class='options'>
+        <div
+            *ngFor='let option in options' 
+            class='option'
+            (click)='_onOptionClick(option)'>
+
+            {{ option }}
+        </div>
+    </div>
+</div>
