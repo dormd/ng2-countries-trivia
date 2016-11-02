@@ -1,17 +1,17 @@
 <div class='riddle'>
     <div class='question'>
-        {{ question }}
+        <span [innerHtml]='question'></span>
     </div>
 
     <hr />
 
     <div class='options'>
         <div
-            *ngFor='let option in options' 
+            *ngFor='let option of options' 
             class='option'
             (click)='_onOptionClick(option)'>
 
-            {{ option }}
+            <span [innerHtml]='option'></span>
         </div>
     </div>
 </div>
