@@ -8,17 +8,28 @@ import { QuestionsGeneratorService }         from '../../services';
 })
 
 export class QuizComponent implements OnInit {
-    private question: string;
-    private options: string[];
-    private answer: string;
+    private _question: string;
+    private _options: string[];
+    private _answer: string;
     
+    private _correctNum = 0;
+    private _wrongNum = 0;
 
     constructor(private _questionsGeneratorService: QuestionsGeneratorService) { }
 
     public ngOnInit(): void {
-        const riddle = this._questionsGeneratorService.getCapitalByCountryQuestion();
-        this.question = riddle.question;
-        this.options = riddle.options;
-        this.answer = riddle.answer;
+        this._generateRiddle();
+    }
+
+    private _onOptionClick(option: string): void {
+        option === this._answer ? this._correctNum++ : this._wrongNum++;
+        this._generateRiddle();        
+    }
+
+    private _generateRiddle() {
+        const riddle = this._questionsGeneratorService.generateTextRiddle();
+        this._question = riddle.question;
+        this._options = riddle.options;
+        this._answer = riddle.answer;
     }
 }

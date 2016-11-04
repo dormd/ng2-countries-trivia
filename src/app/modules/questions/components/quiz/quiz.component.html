@@ -1,4 +1,8 @@
 <text-question 
-    [question]='question'
-    [options]='options'>
+    [question]='_question'
+    [options]='_options'
+    (optionClick)='_onOptionClick($event)'>
 </text-question>
+
+Correct: {{ _correctNum }}
+Wrong: {{ _wrongNum }}
