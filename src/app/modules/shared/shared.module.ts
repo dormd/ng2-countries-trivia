@@ -5,8 +5,7 @@ import { HttpModule  }      from '@angular/http';
          
 // import { MaterialModule }   from '@angular/material';
 
-// import { CountriesPipesModule,
-        //  GeneralPipesModule }      from 'ng2-pipe';
+import { GeneralPipesModule }      from 'ng2-pipe';
 
 import { Ng2BootstrapModule } from 'ng2-bootstrap/ng2-bootstrap';
 
@@ -24,7 +23,7 @@ const modules = [
     FormsModule,
     HttpModule,
     // CountriesPipesModule,
-    // GeneralPipesModule,
+    GeneralPipesModule,
     Ng2BootstrapModule,
     // MaterialModule
 ];
