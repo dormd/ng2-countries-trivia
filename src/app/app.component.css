@@ -1,12 +1,6 @@
 header {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
     background-color: #039BE5;
-    padding-top: 30px;
-    padding-bottom: 10px;         
-}
-
-.header-content {
-    padding: 0 30px;   
 }
 
 header h1 {
@@ -14,18 +8,7 @@ header h1 {
     color: white; 
     font-size: 30px;
     font-weight: bold;
-    padding: 15px 0;   
-}
-
-.sticky-header {
-    position: fixed;
-    width: 100%;
-    z-index: 100;
-    margin-top: -125px;        
-}
-
-.sticky-main {
-    margin-top: 90px;
+    padding-left: 40px;
 }
 
 .main-content-container {
