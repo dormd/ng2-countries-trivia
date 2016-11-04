@@ -15,7 +15,7 @@ You can see how fun to use this npm in our [Demo Application](https://dormd.gith
 ## Table of Contents
 * [Demo app](#demo-app)
 * [Installation](#installation)
-* [List of Questions](#list-of-questions)
+* [List of Riddles](#list-of-riddles)
 * [Development server](#development-server)
 * [Build](#build)
 * [Deploying to Github Pages](#deploying-to-github-pages)
@@ -25,7 +25,7 @@ You can see how fun to use this npm in our [Demo Application](https://dormd.gith
 npm install ng2-countries-trivia
 ```
 
-## List of Questions
+## List of Riddles
 Soon..
 
 ## Development server
