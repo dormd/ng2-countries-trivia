@@ -8,6 +8,20 @@ import { COUNTRIES_DATA,
 
 import * as _ from 'lodash';
 
+interface IStrToStrFunc { 
+    (string): string 
+}
+
+export interface IRiddle {
+    question: string, 
+    options: string[], 
+    answer: string
+}
+
+export interface IRiddleGenerator {
+    (): IRiddle 
+}
+
 @Injectable()
 export class QuestionsGeneratorService {
 
