@@ -1,0 +1,34 @@
+:host {
+    display: flex;
+    justify-content: center;
+}
+
+.riddle {
+    border: 2px solid #001a8e;
+    border-radius: 10px;
+    min-width: 450px;
+}
+
+.question {
+    padding: 20px;
+    font-size: 24px;
+    background-color: #001a8e;
+}
+
+.option {
+    height: 60px;
+    font-size: 17px;
+    padding-left: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.option:hover {
+    background-color: lightcyan;
+    color: #424242;
+}
+
+.option:last-child:hover {
+    border-radius: 0 0 10px 10px;
+}
