@@ -32,3 +32,13 @@
 .option:last-child:hover {
     border-radius: 0 0 10px 10px;
 }
+
+.correct, .correct:hover {
+    color: white;
+    background-color: green;
+}
+
+.wrong, .wrong:hover {
+    color: white;
+    background-color: darkred;
+}

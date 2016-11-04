@@ -6,9 +6,10 @@
 
     <div class='options'>
         <div
-            *ngFor='let option of options' 
-            class='option'
-            (click)='_onOptionClick(option)'>
+            *ngFor='let option of options; let i = index' 
+            [class]='_cssClasses[i]'
+            [class.option]='true'
+            (click)='_onOptionClick(option, i)'>
 
             <span [innerHtml]='option'></span>
         </div>

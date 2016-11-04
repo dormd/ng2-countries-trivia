@@ -9,13 +9,32 @@ import { Component, Inject, Input, Output, EventEmitter }  from '@angular/core';
 export class TextQuestionComponent {
     @Input() question: string;
     @Input() options: string[];
-    // @Input() answer: string;
+    @Input() answerIndex: number;
 
     @Output() optionClick = new EventEmitter();
     
+    private _cssClasses: string[] = [];
+
     constructor() { }
 
-    private _onOptionClick(option: string) {
-        this.optionClick.emit(option);
+    public ngOnChanges(changes: any) {
+        if (changes.options) {
+            this._cssClasses = this.options.map((option): string => {                
+                return 'option';
+            });
+        }
+    }
+
+    private _onOptionClick(option: string, index: number) {
+        this._updateCssClasses(option, index);
+        this.optionClick.emit(index);
+    }
+
+    private _updateCssClasses(selectedOption: string, index: number) {
+        if (index !== this.answerIndex) {
+            this._cssClasses[index] += ' wrong';
+        } 
+
+        this._cssClasses[this.answerIndex] += ' correct';
     }
 }
