@@ -37,8 +37,12 @@ export class QuestionsGeneratorService {
 
     private _getRandomAlpha2(numOfRandoms = 1): string[] {
         return _.times(numOfRandoms, (): string => {
-            const rand = Math.ceil(Math.random() * this._countriesKeys.length); 
+            const rand = this._getRandNum(this._countriesKeys.length); 
             return this._countriesKeys[rand];
         });
+    }
+
+    private _getRandNum(max: number): number {
+        return Math.floor(Math.random() * max); 
     }
 }
