@@ -102,7 +102,7 @@ export class QuestionsGeneratorService {
 
         const questionFunc = (a2: string): string => {
             const populationCount = this._commaStylePipe.transform(this._countriesData[a2].population.count, []);
-            return `Which country has ${ populationCount } peopls?`;
+            return `Which country has ${ populationCount } people?`;
         };
         
         const optionFunc = (a2: string): string => {
