@@ -167,7 +167,7 @@ export class QuestionsGeneratorService {
             return optionsA2s.indexOf(answer);
         };
 
-        const question = 'Which country have more area?';
+        const question = 'Which country has the largest area?';
         return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
     }
 
@@ -181,7 +181,7 @@ export class QuestionsGeneratorService {
             return optionsA2s.indexOf(answer);
         };
 
-        const question = 'Which country have less area?';
+        const question = 'Which country has the smallest area?';
         return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
     }
 
@@ -195,7 +195,7 @@ export class QuestionsGeneratorService {
             return optionsA2s.indexOf(answer);
         };
 
-        const question = 'Which country have more people?';
+        const question = 'Which country has the largest population?';
         return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
     }
 
@@ -209,7 +209,7 @@ export class QuestionsGeneratorService {
             return optionsA2s.indexOf(answer);
         };
 
-        const question = 'Which country have less people?';
+        const question = 'Which country has the amallest population?';
         return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
     }
 
