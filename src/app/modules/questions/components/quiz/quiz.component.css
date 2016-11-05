@@ -1,0 +1,10 @@
+.summary {
+    margin-top: 40px;
+    display: flex;
+    flex-flow: column;
+}
+
+.summary div {
+    margin: auto;
+    margin-top: 10px;
+}

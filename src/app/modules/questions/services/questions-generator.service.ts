@@ -14,6 +14,10 @@ interface IStrToStrFunc {
     (string): string 
 }
 
+interface ICalcAnswerIndexFunc {
+    (optionsA2s: string[]): number
+}
+
 export interface IRiddle {
     question: string, 
     options: string[], 
@@ -27,7 +31,7 @@ export interface IRiddleGenerator {
 @Injectable()
 export class QuestionsGeneratorService {
 
-    private _textQuestionsGenerators: IRiddleGenerator[];
+    private _riddlesGenrators: IRiddleGenerator[];
     private _countriesKeys: string[];
     private _NUM_OF_OPTIONS = 4;
     // private _CONTINENTS = []
@@ -38,19 +42,31 @@ export class QuestionsGeneratorService {
 
         this._countriesKeys = _.keys(this._countriesData); 
 
-        this._textQuestionsGenerators = [
+        const regularTextRiddlesGenerators = [
             this._generateCapitalByCountryQuestion,
             this._generateCountryByCapitalQuestion,
             this._generatePopulationByCountryQuestion,
             this._generateCountryByPopulationQuestion,
             this._generateAreaByCountryQuestion,
-            this._generateCountryByAreaQuestion
-        ];             
+            this._generateCountryByAreaQuestion,
+        ];
+
+        const muchRiddleGenerators = [
+            this._generateMuchBiggerCountryByAreaQuestion,
+            this._generateMuchLittleCountryByAreaQuestion,
+            this._generateMuchBiggerCountryByPopulationQuestion,
+            this._generateMuchLittleCountryByPopulationQuestion,
+        ];
+
+        this._riddlesGenrators = [
+            ...regularTextRiddlesGenerators,
+            ...muchRiddleGenerators,
+        ]     
     }
 
     public generateTextRiddle() {
-        const generatorIndex = this._getRandNum(this._textQuestionsGenerators.length); 
-        const generator = this._textQuestionsGenerators[generatorIndex];
+        const generatorIndex = this._getRandNum(this._riddlesGenrators.length); 
+        const generator = this._riddlesGenrators[generatorIndex];
         const riddle = generator();
 
         return riddle;       
@@ -141,6 +157,73 @@ export class QuestionsGeneratorService {
         return this._generateTextRiddleHelper(questionFunc, optionFunc);
     }
 
+    private _generateMuchBiggerCountryByAreaQuestion = (): IRiddle => {
+
+        const calcAnswerIndexFunc = (optionsA2s: string[]): number => {
+            const answer = _.maxBy(optionsA2s, (a2: string): number => {
+                return this._countriesData[a2].geo.area;
+            });
+
+            return optionsA2s.indexOf(answer);
+        };
+
+        const question = 'Which country have more area?';
+        return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
+    }
+
+    private _generateMuchLittleCountryByAreaQuestion = (): IRiddle => {
+
+        const calcAnswerIndexFunc = (optionsA2s: string[]): number => {
+            const answer = _.minBy(optionsA2s, (a2: string): number => {
+                return this._countriesData[a2].geo.area;
+            });
+
+            return optionsA2s.indexOf(answer);
+        };
+
+        const question = 'Which country have less area?';
+        return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
+    }
+
+    private _generateMuchBiggerCountryByPopulationQuestion = (): IRiddle => {
+
+        const calcAnswerIndexFunc = (optionsA2s: string[]): number => {
+            const answer = _.maxBy(optionsA2s, (a2: string): number => {
+                return this._countriesData[a2].population.count;
+            });
+
+            return optionsA2s.indexOf(answer);
+        };
+
+        const question = 'Which country have more people?';
+        return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
+    }
+
+    private _generateMuchLittleCountryByPopulationQuestion = (): IRiddle => {
+
+        const calcAnswerIndexFunc = (optionsA2s: string[]): number => {
+            const answer = _.minBy(optionsA2s, (a2: string): number => {
+                return this._countriesData[a2].population.count;
+            });
+
+            return optionsA2s.indexOf(answer);
+        };
+
+        const question = 'Which country have less people?';
+        return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
+    }
+
+    private _generateMostRiddleHelper = (question: string, calcAnswerIndexFunc: ICalcAnswerIndexFunc): IRiddle => {
+
+        const optionsA2s = this._getRandomAlpha2(this._NUM_OF_OPTIONS);
+        const options = optionsA2s.map((a2: string): string => {
+            return this._countriesData[a2].name.common;
+        });
+
+        const answerIndex = calcAnswerIndexFunc(optionsA2s);
+        return { question, options, answerIndex };
+    }
+
     // private _generateContinentByCountryQuestion = (): IRiddle => {
     //     const a2 = this._getRandomAlpha2()[0];
     //     const country = this._countriesData[a2].name.common;
@@ -156,7 +239,7 @@ export class QuestionsGeneratorService {
     private _generateTextRiddleHelper(generateQuestion: IStrToStrFunc, generateOption: IStrToStrFunc): IRiddle {
         const optionsA2s = this._getRandomAlpha2(this._NUM_OF_OPTIONS);
         const questionIndex = this._getRandNum(this._NUM_OF_OPTIONS);
-        const questionA2: string = optionsA2s[questionIndex];
+        const questionA2 = optionsA2s[questionIndex];
         
         const question = generateQuestion(questionA2);
         const options = optionsA2s.map(generateOption);
