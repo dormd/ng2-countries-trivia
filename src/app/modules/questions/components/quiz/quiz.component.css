@@ -4,6 +4,12 @@
     flex-flow: column;
 }
 
+@media screen and (max-width: 480px) {
+    .summary {
+        margin-top: 20px;
+    }
+}
+
 .summary div {
     margin: auto;
     margin-top: 10px;
