@@ -9,10 +9,22 @@
     min-width: 450px;
 }
 
+@media screen and (max-width: 480px) {
+    .riddle {
+        min-width: 350px;
+    }
+}
+
 .question {
     padding: 20px;
     font-size: 24px;
     background-color: #001a8e;
+}
+
+@media screen and (max-width: 480px) {
+    .question {
+        font-size: 21px;
+    }
 }
 
 .option {
@@ -24,9 +36,17 @@
     align-items: center;
 }
 
-.option:hover {
-    background-color: lightcyan;
-    color: #424242;
+@media screen and (min-width: 480px) {
+    .option {
+        min-width: 40px;
+    }
+}
+
+@media screen and (min-width: 780px) {
+    .option:hover {
+        background-color: lightcyan;
+        color: #424242;
+    }
 }
 
 .option:last-child:hover {

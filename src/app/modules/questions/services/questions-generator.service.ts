@@ -209,7 +209,7 @@ export class QuestionsGeneratorService {
             return optionsA2s.indexOf(answer);
         };
 
-        const question = 'Which country has the amallest population?';
+        const question = 'Which country has the smallest population?';
         return this._generateMostRiddleHelper(question, calcAnswerIndexFunc);
     }
 
