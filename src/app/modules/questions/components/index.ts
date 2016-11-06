@@ -1,2 +1,2 @@
-export * from './text-question/text-question.component';
+export * from './riddle/riddle.component';
 export * from './quiz/quiz.component';
