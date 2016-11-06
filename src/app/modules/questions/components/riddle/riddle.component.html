@@ -1,0 +1,32 @@
+<div class='riddle'>
+    <div class='question'>
+        <i class="fa fa-question-circle" aria-hidden="true"></i>
+        <span [innerHtml]='question'></span>
+    </div>
+
+    <div class='options'>
+        <div
+            *ngFor='let option of options; let i = index' 
+            [class]='_cssClasses[i]'
+            [class.option]='true'
+            (click)='_onOptionClick(option, i)'>
+
+            <span [ngSwitch]='riddleType'>
+                <span 
+                    *ngSwitchCase='_riddleTypes.Text'
+                    [innerHtml]='option'>
+                </span>
+
+                <span *ngSwitchCase='_riddleTypes.FlagByCountry'>
+                    <country-flag 
+                        [alpha2]='option'
+                        [height]='50'
+                        [width]='50'>
+                    </country-flag>
+                </span>
+
+                <span *ngSwitchDefault></span>
+            </span>            
+        </div>
+    </div>
+</div>

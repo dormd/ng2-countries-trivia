@@ -1,20 +1,23 @@
 import { Component, Inject, Input, Output, EventEmitter }  from '@angular/core';
+import { RiddleType } from '../../models';
 
 @Component({
-    selector: 'text-question',
-    templateUrl: './text-question.component.html',
-    styleUrls: [ './text-question.component.css' ],	
+    selector: 'riddle',
+    templateUrl: './riddle.component.html',
+    styleUrls: [ './riddle.component.css' ],	
 })
 
-export class TextQuestionComponent {
+export class RiddleComponent {
+    @Input() riddleType: RiddleType;
     @Input() question: string;
     @Input() options: string[];
     @Input() answerIndex: number;
-
+ 
     @Output() optionClick = new EventEmitter();
     
     private _cssClasses: string[] = [];
-
+    private _riddleTypes = RiddleType;
+    
     constructor() { }
 
     public ngOnChanges(changes: any) {
