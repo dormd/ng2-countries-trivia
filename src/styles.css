@@ -4,3 +4,5 @@ body {
     color: white;
     margin: 0px;
 }
+
+@import '../node_modules/flag-icon-css/css/flag-icon.min.css';

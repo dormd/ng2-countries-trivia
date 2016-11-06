@@ -1,14 +1,16 @@
 import { Injectable,
          Inject }         from '@angular/core';
 
+import { CommaStylePipe } from 'ng2-pipe';
+import * as _ from 'lodash';
+
 import { COUNTRIES_DATA, 
          Countries, 
          ANTHEMS_DATA, 
          Anthems }        from '../../shared/models';
 
-import { CommaStylePipe } from 'ng2-pipe';
+import { IRiddle, RiddleType } from '../models';
 
-import * as _ from 'lodash';
 
 interface IStrToStrFunc { 
     (string): string 
@@ -16,12 +18,6 @@ interface IStrToStrFunc {
 
 interface ICalcAnswerIndexFunc {
     (optionsA2s: string[]): number
-}
-
-export interface IRiddle {
-    question: string, 
-    options: string[], 
-    answerIndex: number
 }
 
 export interface IRiddleGenerator {
@@ -32,6 +28,7 @@ export interface IRiddleGenerator {
 export class QuestionsGeneratorService {
 
     private _riddlesGenrators: IRiddleGenerator[];
+    private _flagsRiddleGenerators: IRiddleGenerator[];
     private _countriesKeys: string[];
     private _NUM_OF_OPTIONS = 4;
     // private _CONTINENTS = []
@@ -58,18 +55,42 @@ export class QuestionsGeneratorService {
             this._generateMuchLittleCountryByPopulationQuestion,
         ];
 
+        const flagsRiddleGenerators = [
+            this._generateFlagRiddle
+        ];
+
         this._riddlesGenrators = [
             ...regularTextRiddlesGenerators,
             ...muchRiddleGenerators,
-        ]     
+            ...flagsRiddleGenerators
+        ];
+
+        this._flagsRiddleGenerators = flagsRiddleGenerators;
     }
 
-    public generateTextRiddle() {
-        const generatorIndex = this._getRandNum(this._riddlesGenrators.length); 
-        const generator = this._riddlesGenrators[generatorIndex];
-        const riddle = generator();
+    public generateRiddle(_isOnlyFlagRiddles: boolean): IRiddle {
+        let generator;
+        
+        if (_isOnlyFlagRiddles) {
+            const generatorIndex = this._getRandNum(this._flagsRiddleGenerators.length);
+            generator = this._flagsRiddleGenerators[generatorIndex];
+        } 
+        else {
+            const generatorIndex = this._getRandNum(this._riddlesGenrators.length);
+            generator = this._riddlesGenrators[generatorIndex];
+        } 
+            
+        return generator();       
+    }
 
-        return riddle;       
+    private _generateFlagRiddle = (): IRiddle => {
+        const type = RiddleType.FlagByCountry;
+        const options = this._getRandomAlpha2(this._NUM_OF_OPTIONS);
+        const answerIndex = this._getRandNum(this._NUM_OF_OPTIONS);
+        const countryName = this._countriesData[options[answerIndex]].name.common;
+        const question = `What is the flag of ${countryName}?`;
+        
+        return { type, question, options, answerIndex };
     }
 
     private _generateCapitalByCountryQuestion = (): IRiddle => {
@@ -214,14 +235,14 @@ export class QuestionsGeneratorService {
     }
 
     private _generateMostRiddleHelper = (question: string, calcAnswerIndexFunc: ICalcAnswerIndexFunc): IRiddle => {
-
+        const type = RiddleType.Text;
         const optionsA2s = this._getRandomAlpha2(this._NUM_OF_OPTIONS);
         const options = optionsA2s.map((a2: string): string => {
             return this._countriesData[a2].name.common;
         });
 
         const answerIndex = calcAnswerIndexFunc(optionsA2s);
-        return { question, options, answerIndex };
+        return { type, question, options, answerIndex };
     }
 
     // private _generateContinentByCountryQuestion = (): IRiddle => {
@@ -237,6 +258,7 @@ export class QuestionsGeneratorService {
     // }
 
     private _generateTextRiddleHelper(generateQuestion: IStrToStrFunc, generateOption: IStrToStrFunc): IRiddle {
+        const type = RiddleType.Text;
         const optionsA2s = this._getRandomAlpha2(this._NUM_OF_OPTIONS);
         const questionIndex = this._getRandNum(this._NUM_OF_OPTIONS);
         const questionA2 = optionsA2s[questionIndex];
@@ -245,7 +267,7 @@ export class QuestionsGeneratorService {
         const options = optionsA2s.map(generateOption);
         const answerIndex = questionIndex;
         
-        return { question, options, answerIndex };
+        return { type, question, options, answerIndex };
     }
 
     private _getRandomAlpha2(numOfRandoms = 1): string[] {

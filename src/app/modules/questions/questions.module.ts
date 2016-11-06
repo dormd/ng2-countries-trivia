@@ -1,15 +1,18 @@
 import { NgModule }                    from '@angular/core';
+import { GalleryModule }               from 'ng2-countries/src/app';
+
 import { SharedModule }                from '../shared';
-import { TextQuestionComponent, 
+import { RiddleComponent, 
          QuizComponent }               from './components';
 import { QuestionsGeneratorService }   from './services';
 
 const modules = [
-    SharedModule
+    SharedModule,
+    GalleryModule
 ];
 
 const components = [
-    TextQuestionComponent,
+    RiddleComponent,
     QuizComponent
 ];
 
