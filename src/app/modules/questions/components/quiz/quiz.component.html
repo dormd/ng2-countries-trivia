@@ -1,9 +1,14 @@
-<text-question 
-    [question]='_question'
-    [options]='_options'
-    [answerIndex]='_answerIndex'
+<div class="settings">
+    <label><input type="checkbox" [(ngModel)]='isOnlyFlagRiddles'>Only Flags</label>
+</div>
+
+<riddle
+    [question]='_riddle.question'
+    [options]='_riddle.options'
+    [answerIndex]='_riddle.answerIndex'
+    [riddleType]='_riddle.type'
     (optionClick)='_onOptionClick($event)'>
-</text-question>
+</riddle>
 
 <div class='summary'>
     <div>Correct: {{ _correctNum }}</div>

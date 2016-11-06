@@ -1,7 +1,10 @@
-.summary {
-    margin-top: 40px;
+.summary, .settings {
     display: flex;
     flex-flow: column;
+}
+
+.summary {
+    margin-top: 40px;
 }
 
 @media screen and (max-width: 480px) {
@@ -13,4 +16,9 @@
 .summary div {
     margin: auto;
     margin-top: 10px;
+}
+
+.settings label {
+    margin: auto;
+    margin-bottom: 10px;
 }
