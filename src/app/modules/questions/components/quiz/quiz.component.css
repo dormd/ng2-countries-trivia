@@ -22,3 +22,7 @@
     margin: auto;
     margin-bottom: 10px;
 }
+
+.settings input {
+    margin-right: 5px;
+}

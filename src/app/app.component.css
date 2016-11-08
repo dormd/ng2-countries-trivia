@@ -1,11 +1,13 @@
 header {
+    position: relative;
+    height: 90px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.26);
     background-color: #039BE5;
+    color: white; 
 }
 
 header h1 {
     display: inline-block;
-    color: white; 
     font-size: 30px;
     font-weight: bold;
     padding-left: 40px;
@@ -18,7 +20,29 @@ header h1 {
     }
 }
 
+header a {
+    color: white;
+    font-size: 18px;
+    margin-right: 3px;
+}
+
+.external-links {
+    position: absolute;
+    bottom: 3px;
+    right: 20px;
+    z-index: 5;
+}
+
+/*iframe {
+    width: 144px !important;
+    height: 30px !important;
+    border: none;
+    overflow: hidden;
+    margin: 2px;
+}*/
+
 .main-content-container {
+    position: relative;
     padding: 35px 15px 15px 15px;
 }
 
@@ -26,4 +50,10 @@ header h1 {
     .main-content-container {
         padding-top: 20px;
     }
+}
+
+.main-content-container .twitter-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
 }
