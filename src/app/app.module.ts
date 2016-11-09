@@ -1,16 +1,21 @@
 import { NgModule }          from '@angular/core';
 
 import { SharedModule,
-         QuestionsModule }    from './modules';
- 
+         QuestionsModule }   from './modules';
+
+import { AppRoutingModule }  from './app-routing.module';
+import { SettingsComponent } from './components';
+
 import { AppComponent }      from './app.component';
 
 const modules = [
     SharedModule,
     QuestionsModule,
+    AppRoutingModule
 ];
 
 const components = [
+    SettingsComponent,
     AppComponent
 ];
 

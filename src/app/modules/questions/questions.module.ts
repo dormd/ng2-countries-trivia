@@ -5,10 +5,12 @@ import { SharedModule }                from '../shared';
 import { RiddleComponent, 
          QuizComponent }               from './components';
 import { QuestionsGeneratorService }   from './services';
+import { QuestionsRoutingModule }      from './questions-routing.module';
 
 const modules = [
     SharedModule,
-    GalleryModule
+    GalleryModule,
+    QuestionsRoutingModule
 ];
 
 const components = [
