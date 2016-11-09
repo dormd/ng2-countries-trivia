@@ -1,4 +1,4 @@
-.summary, .settings {
+.summary {
     display: flex;
     flex-flow: column;
 }
@@ -16,13 +16,4 @@
 .summary div {
     margin: auto;
     margin-top: 10px;
-}
-
-.settings label {
-    margin: auto;
-    margin-bottom: 10px;
-}
-
-.settings input {
-    margin-right: 5px;
 }

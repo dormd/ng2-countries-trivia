@@ -4,7 +4,7 @@ import { SharedModule,
          QuestionsModule }   from './modules';
 
 import { AppRoutingModule }  from './app-routing.module';
-import { SettingsComponent } from './components';
+import { SettingsComponent } from './modules/settings';
 
 import { AppComponent }      from './app.component';
 
