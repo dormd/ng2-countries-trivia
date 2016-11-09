@@ -4,18 +4,20 @@ import { GalleryModule }               from 'ng2-countries/src/app';
 import { SharedModule }                from '../shared';
 import { RiddleComponent, 
          QuizComponent }               from './components';
+import { SettingsModule }              from '../settings';
 import { QuestionsGeneratorService }   from './services';
 import { QuestionsRoutingModule }      from './questions-routing.module';
 
 const modules = [
     SharedModule,
     GalleryModule,
-    QuestionsRoutingModule
+    QuestionsRoutingModule,
+    SettingsModule
 ];
 
 const components = [
     RiddleComponent,
-    QuizComponent
+    QuizComponent 
 ];
 
 const directives = [];
