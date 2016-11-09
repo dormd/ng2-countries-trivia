@@ -1,0 +1,49 @@
+.levels, .only-flags-settings, .start-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.levels {
+    max-width: 300px;
+    padding-left: 0;
+}
+
+.level {
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 18px 24px;
+    font-size: inherit;
+    font-weight: 500;
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    border-color: hsla(0, 0%, 100%, .5);
+    transition: all .1s ease-in-out;
+}
+    
+.level:active, .level:hover {
+    color: #0d6632;
+    background-color: #fff;
+    border-color: #fff
+}
+
+.only-flags-settings label {
+    margin: auto;
+    margin-bottom: 10px;
+}
+
+.only-flags-settings input {
+    margin-right: 5px;
+}
+
+.start-container {
+    margin-top: 15px;
+}
+
+.start-container button {
+    width: 100px;
+    margin: auto;
+    background-color: #039BE5;
+}
