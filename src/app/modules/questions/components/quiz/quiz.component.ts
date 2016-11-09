@@ -2,7 +2,7 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionsGeneratorService } from '../../services';
 import { IRiddle } from '../../models';
-import { Levels, IQuizQueryParams } from '../../../../models';
+import { SettingsService, Levels, IQuizQueryParams } from '../../../settings';
 
 @Component({
     selector: 'quiz',
@@ -21,16 +21,14 @@ export class QuizComponent implements OnInit {
     private _wrongNum = 0;
 
     constructor(private _route: ActivatedRoute,
-                private _questionsGeneratorService: QuestionsGeneratorService) { }
+                private _questionsGeneratorService: QuestionsGeneratorService,
+                private _settingsService: SettingsService) { }
     
     public ngOnInit(): void {
-        const queryParams: IQuizQueryParams = this._route.queryParams.value;
-        this._level = queryParams.level || Levels.Easy;
-        this._isFlagsOnly = queryParams.isFlagsOnly || false;
+        this._level = this._settingsService.getLevel() || Levels.Easy;
+        this._isFlagsOnly = this._settingsService.getIsFlagsOnly() || false;
 
         this._generateRiddle();
-        console.log(this._level);
-        console.log(this._isFlagsOnly);        
     }
 
     private _onOptionClick(optionIndex: number): void {
