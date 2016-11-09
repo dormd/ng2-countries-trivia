@@ -23,7 +23,13 @@
     transition: all .1s ease-in-out;
 }
     
-.level:active, .level:hover {
+.level:active, .level:hover, .level.selected {
+    color: #0d6632;
+    background-color: #fff;
+    border-color: #fff
+}
+
+.level.selected {
     color: #0d6632;
     background-color: #fff;
     border-color: #fff

@@ -1,14 +1,37 @@
 <div class='only-flags-settings'>
     <label>
-        <input type="checkbox" [(ngModel)]='_isOnlyFlagsRiddles'> Only Flags
+        <input type="checkbox" [(ngModel)]='_isFlagsOnlyRiddles'> Only Flags
     </label>
 </div>
 
 <ul class='levels'>
-    <li class='level btn btn-lg' (click)='_level = _levels.Easy'>Easy</li>
-    <li class='level btn btn-lg' (click)='_level = _levels.Medium'>Medium</li>
-    <li class='level btn btn-lg' (click)='_level = _levels.Hard'>Hard</li>
-    <li class='level btn btn-lg' (click)='_level = _levels.Expert'>Expert</li>
+    <li class='level btn btn-lg' 
+        (click)='_level = _levels.Easy'
+        [class.selected]='_level === _levels.Easy'>
+        
+        Easy
+    </li>
+    
+    <li class='level btn btn-lg' 
+        (click)='_level = _levels.Medium'
+        [class.selected]='_level === _levels.Medium'>
+        
+        Medium
+    </li>
+    
+    <li class='level btn btn-lg' 
+        (click)='_level = _levels.Hard'
+        [class.selected]='_level === _levels.Hard'>
+        
+        Hard
+    </li>
+
+    <li class='level btn btn-lg' 
+        (click)='_level = _levels.Expert'
+        [class.selected]='_level === _levels.Expert'>
+        
+        Expert
+    </li>
 </ul>
 
 <div class='start-container'>
