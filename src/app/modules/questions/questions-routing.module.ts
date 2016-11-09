@@ -4,9 +4,9 @@ import { QuizComponent } from './components';
 
 @NgModule({
   imports: [
-    RouterModule.forChild([
-        { path: 'trivia', component: QuizComponent }
-    ])
+      RouterModule.forChild([
+          { path: 'trivia', component: QuizComponent }
+      ])
   ],
   exports: [
         RouterModule
