@@ -4,21 +4,21 @@ import { Levels } from '../models';
 @Injectable()
 export class SettingsService {
 
-    private _isOnlyFlags = false;
+    private _isFlagsOnly = false;
     private _level = Levels.Easy;
 
     constructor() {}
 
-    public getIsOnlyFlags(): boolean {
-        return this._isOnlyFlags;
+    public getIsFlagsOnly(): boolean {
+        return this._isFlagsOnly;
     }
 
     public getLevel(): Levels {
         return this._level;
     }
 
-    public setIsOnlyFlags(isOnlyFlags: boolean) {
-        this._isOnlyFlags = isOnlyFlags;
+    public setIsFlagsOnly(isFlagsOnly: boolean) {
+        this._isFlagsOnly = isFlagsOnly;
     }
 
     public setLevel(level: Levels) {
