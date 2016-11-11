@@ -10,6 +10,7 @@ import { COUNTRIES_DATA,
          Anthems }        from '../../shared/models';
 
 import { IRiddle, RiddleType } from '../models';
+import { Levels } from '../../settings';
 
 
 interface IStrToStrFunc { 
@@ -27,7 +28,9 @@ export interface IRiddleGenerator {
 @Injectable()
 export class QuestionsGeneratorService {
 
-    private _riddlesGenrators: IRiddleGenerator[];
+    private _riddlesGenratorsByLevel: {
+        [level: number]: IRiddleGenerator[]
+    };
     private _flagsRiddleGenerators: IRiddleGenerator[];
     private _countriesKeys: string[];
     private _NUM_OF_OPTIONS = 4;
@@ -39,46 +42,56 @@ export class QuestionsGeneratorService {
 
         this._countriesKeys = _.keys(this._countriesData); 
 
-        const regularTextRiddlesGenerators = [
+        const easyRiddlesGenerators = [
             this._generateCapitalByCountryQuestion,
             this._generateCountryByCapitalQuestion,
-            this._generatePopulationByCountryQuestion,
-            this._generateCountryByPopulationQuestion,
-            this._generateAreaByCountryQuestion,
-            this._generateCountryByAreaQuestion,
+            this._generateFlagRiddle
         ];
 
-        const muchRiddleGenerators = [
+        const mediumRiddlesGenerators = [
+            ...easyRiddlesGenerators,
             this._generateMuchBiggerCountryByAreaQuestion,
             this._generateMuchLittleCountryByAreaQuestion,
             this._generateMuchBiggerCountryByPopulationQuestion,
             this._generateMuchLittleCountryByPopulationQuestion,
         ];
 
-        const flagsRiddleGenerators = [
+        const hardRiddlesGenerators = [
+            ...mediumRiddlesGenerators,
+            this._generatePopulationByCountryQuestion,
+            this._generateCountryByPopulationQuestion,
+            this._generateAreaByCountryQuestion,
+            this._generateCountryByAreaQuestion,
+        ];
+
+        const expertRiddlesGenerators = [
+            ...hardRiddlesGenerators,
+        ];
+
+        this._riddlesGenratorsByLevel = {
+            [Levels.Easy]: easyRiddlesGenerators,
+            [Levels.Medium]: mediumRiddlesGenerators,
+            [Levels.Hard]: hardRiddlesGenerators,                        
+            [Levels.Expert]: expertRiddlesGenerators,                        
+        };
+
+        this._flagsRiddleGenerators = [
             this._generateFlagRiddle
         ];
-
-        this._riddlesGenrators = [
-            ...regularTextRiddlesGenerators,
-            ...muchRiddleGenerators,
-            ...flagsRiddleGenerators
-        ];
-
-        this._flagsRiddleGenerators = flagsRiddleGenerators;
     }
 
-    public generateRiddle(_isOnlyFlagRiddles: boolean): IRiddle {
+    public generateRiddle(level: Levels, _isOnlyFlagRiddles: boolean): IRiddle {
         let generator;
         
         if (_isOnlyFlagRiddles) {
             const generatorIndex = this._getRandNum(this._flagsRiddleGenerators.length);
             generator = this._flagsRiddleGenerators[generatorIndex];
+            return generator();
         } 
-        else {
-            const generatorIndex = this._getRandNum(this._riddlesGenrators.length);
-            generator = this._riddlesGenrators[generatorIndex];
-        } 
+        
+        const riddles = this._riddlesGenratorsByLevel[level];
+        const generatorIndex = this._getRandNum(riddles.length);
+        generator = riddles[generatorIndex];
             
         return generator();       
     }

@@ -37,6 +37,6 @@ export class QuizComponent implements OnInit {
     }
 
     private _generateRiddle = (): void => {
-        this._riddle = this._questionsGeneratorService.generateRiddle(this._isFlagsOnly);
+        this._riddle = this._questionsGeneratorService.generateRiddle(this._level, this._isFlagsOnly);
     }
 }
